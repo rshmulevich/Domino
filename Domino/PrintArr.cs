@@ -10,15 +10,18 @@ namespace Domino
     {
         public PrintArr(int[] arr, int seq)
         {
-            Console.Write("sequence #: "+seq.ToString()+"\n");
+            Console.WriteLine ("sequence #: "+seq.ToString());
             for (int i = 0; i < arr.Length - 1; i++)
             {
-                
-                if (arr[i] !=0)
+
+                if (arr[i] != 0)
                     Console.Write(arr[i].ToString());
             }
 
-            Console.Write("\n");
+            //foreach (int a in arr)
+            //    Console.Write(arr[a]);
+
+            Console.WriteLine();
         }
 
     }
