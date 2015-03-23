@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDominoArrayPrinter.cs" />
     <Compile Include="JInput.cs" />
     <Compile Include="JPiece.cs" />
     <Compile Include="PrintArr.cs" />
