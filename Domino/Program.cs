@@ -13,35 +13,84 @@ namespace Domino
     {
         public static void Main(string[] args)
         {
-            string str;
-            ReadJasonFile Reader = new ReadJasonFile();
-            Object Pieces = new Object();
-            str = Reader.Readfile(@"C:\Users\Roman\Documents\Visual Studio 2012\Projects\Domino\Pieces.json");
+            string jstr;
+            int numberOfpieces;
 
-            var pieces = JsonConvert.DeserializeObject<JInput>(str);
-            //Pieces = JsonConvert.DeserializeObject<Piece>(str);
+            int matchCounter = 0;
 
-            JToken entireJson = JToken.Parse(str);
+            ReadJsonFile Reader = new ReadJsonFile();
+            jstr = Reader.Readfile(@"C:\Users\Roman\Documents\Visual Studio 2012\Projects\Domino\Pieces.json");
             
-            //JObject o = JObject.Parse(str);
+            var heapOf = JsonConvert.DeserializeObject<JInput>(jstr);//reading the json file
+            
+            numberOfpieces = heapOf.pieces.Length;//counting elements
+           
 
-            //JArray inner = entireJson["Pieces"].Value<JArray>();
+            for (int p = 0; p < numberOfpieces; p++)
+            {
+                int[] sortArr = new int[numberOfpieces * 2]; //array for sorting
+                //intit of the first element
+                sortArr[0] = heapOf.pieces[p].left;
+                sortArr[1] = heapOf.pieces[p].right;
 
-            //This will be "Apple"
-            //string name = (string)o["left"];
+                for (int i = 1, j = 2; i < numberOfpieces; i++, j = j + 2)
+                {
+                    if (heapOf.pieces[i].left == sortArr[j - 1] && (p!=i))//checking right side
+                    {
+                        sortArr[j] = heapOf.pieces[i].left;
+                        sortArr[j + 1] = heapOf.pieces[i].right;
 
-            Console.Write(str);
+                        matchCounter++;
+                       new PrintArr(sortArr, matchCounter);
+                    }
+                    else if (heapOf.pieces[i].right == sortArr[j - 1] && (p != i))//checking right side
+                    {
+                        sortArr[j] = heapOf.pieces[i].right;
+                        sortArr[j + 1] = heapOf.pieces[i].left;
+
+                        matchCounter++;
+                        new PrintArr(sortArr, matchCounter);
+                    }
+                    else if (heapOf.pieces[i].left == sortArr[0] && (p != i))//checking left side
+                    {
+                        for (int cnt = sortArr.Length-1; cnt > 1; cnt = cnt - 2)
+                        {
+                            sortArr[cnt] = sortArr[cnt-2];
+                            sortArr[cnt-1] = sortArr[cnt - 3];
+
+                        }
+
+                        sortArr[0] = heapOf.pieces[i].right;
+                        sortArr[1] = heapOf.pieces[i].left;
+
+                        matchCounter++;
+                        new PrintArr(sortArr, matchCounter);
+                    }
+                    else if (heapOf.pieces[i].right == sortArr[0] && (p != i))//checking left side
+                    {
+                        for (int cnt = sortArr.Length - 1; cnt > 1; cnt = cnt - 2)
+                        {
+                            sortArr[cnt] = sortArr[cnt - 2];
+                            sortArr[cnt - 1] = sortArr[cnt - 3];
+                        }
+
+                        sortArr[1] = heapOf.pieces[i].right;
+                        sortArr[0] = heapOf.pieces[i].left;
+
+                        matchCounter++;
+                        new PrintArr(sortArr, matchCounter);
+                    }
+
+
+
+                }
+            }
+
             Console.Read();
+          
 
         }
     }
-    public class JPiece
-    {
-        public int left { get; set; }
-        public int right { get; set; }
-    }
-    public class JInput
-    {
-        public JPiece[] pieces { get; set; }
-    }
+    
+   
 }

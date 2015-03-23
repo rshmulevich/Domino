@@ -8,11 +8,11 @@ using System.IO;
 
 namespace Domino
 {
-    public class ReadJasonFile
+    public class ReadJsonFile
     {
         private string _text;
 
-        public ReadJasonFile()
+        public ReadJsonFile()
         {
             // string _text = System.IO.File.ReadAllText(@"C:\Users\Roman\Documents\Visual Studio 2012\Projects\Domino\Pieces.json");
            

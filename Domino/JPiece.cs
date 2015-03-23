@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domino
 {
-    public interface IPiece
+    public class JPiece
     {
-        int LeftVal { get; }
-        int RightVal { get; }
+        public int left { get; set; }
+        public int right { get; set; }
     }
 }
