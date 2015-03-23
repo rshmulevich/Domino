@@ -19,7 +19,7 @@ namespace Domino
             int matchCounter = 0;
 
             ReadJsonFile Reader = new ReadJsonFile();
-            jstr = Reader.Readfile(@"C:\Users\Roman\Documents\Visual Studio 2012\Projects\Domino\Pieces.json");
+            jstr = Reader.Readfile(@"C:\Temp\Pieces.json");
             
             var heapOf = JsonConvert.DeserializeObject<JInput>(jstr);//reading the json file
             
